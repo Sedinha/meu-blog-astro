@@ -6,22 +6,13 @@ Marco 1: Fundação e Primeiro Deploy
 Objetivo: Ter um blog Astro básico, com o fluxo de trabalho de conteúdo funcional, implantado na Cloudflare Pages.
 Tarefas Ativas
 
+    [ ] Content-04: Criar o primeiro post de teste em Markdown no Obsidian.
 
 Backlog
-
-    [ ] Setup-02: Criar o repositório principal no GitHub para o projeto Astro.
 
     [ ] Setup-03: Criar um repositório Git privado separado para o conteúdo (meu-blog-conteudo).
 
     [ ] Setup-04: Criar um arquivo .env.example para gerenciamento de configurações futuras.
-
-    [ ] Content-01: Adicionar o repositório de conteúdo como um Git Submodule em src/content/blog.
-
-    [ ] Content-02: Configurar o Obsidian para usar src/content/blog como um vault.
-
-    [ ] Content-03: Instalar e configurar o plugin Obsidian Git para gerenciar commits de conteúdo.
-
-    [ ] Content-04: Criar o primeiro post de teste em Markdown no Obsidian.
 
     [ ] Deploy-01: Conectar o repositório principal do Astro à Cloudflare Pages.
 
@@ -36,3 +27,8 @@ Backlog
 Concluído
 
     [x] Setup-01: Inicializar um novo projeto Astro com o template de blog.
+    [x] Setup-02: Criar o repositório principal no GitHub para o projeto Astro.
+    [x] Content-01: Adicionar o repositório de conteúdo como um Git Submodule em src/content/blog.
+    [x] Content-02: Configurar o Obsidian para usar src/content/blog como um vault.
+    [x] Content-03: Instalar e configurar o plugin Obsidian Git para gerenciar commits de conteúdo.
+
