@@ -1,68 +1,36 @@
-# Astro Starter Kit: Blog
+Projeto de Blog Pessoal Automatizado com Astro e Obsidian
 
-```sh
-npm create astro@latest -- --template blog
-```
+Este repositório contém o código-fonte e a arquitetura para um blog pessoal moderno e de alta performance, projetado para maximizar a marca pessoal de um desenvolvedor através de um fluxo de trabalho de conteúdo altamente automatizado.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
+O projeto é construído sobre a filosofia "Content as Code" e segue uma metodologia de desenvolvimento assistida por IA rigorosa para garantir um código limpo, modular e escalável.
+Visão Geral da Arquitetura
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+O projeto integra um conjunto de ferramentas modernas para criar um ciclo virtuoso de criação e distribuição de conteúdo:
 
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+    Escrita (IDE de Conteúdo): Obsidian é usado para criar e gerenciar todo o conteúdo em arquivos .md locais.
 
-Features:
+    Repositório de Conteúdo: Um repositório Git separado (Git Submodule) contém todos os artigos, desacoplando o conteúdo da sua apresentação.
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+    Site (Camada de Apresentação): Um projeto Astro consome os arquivos Markdown para gerar um site estático, rápido e otimizado para SEO, com uma estética de pixel art.
 
-## 🚀 Project Structure
+    Hospedagem e CI/CD: A Cloudflare Pages realiza o deploy contínuo, oferecendo uma rede de entrega global de alta performance.
 
-Inside of your Astro project, you'll see the following folders and files:
+    Automação da Marca: Uma GitHub Action monitora o feed RSS do blog e atualiza dinamicamente a seção de artigos no README do perfil do GitHub.
 
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+Princípios de Desenvolvimento
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Este projeto é gerenciado com o auxílio de uma IA e segue um conjunto estrito de regras para garantir a qualidade:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+    Gerenciamento por Markdown: O escopo é definido no PLANNING.md e as tarefas no TASK.md.
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+    Modularidade: Os arquivos de código são mantidos concisos (idealmente < 200 linhas) e organizados por responsabilidade.
 
-Any static assets, like images, can be placed in the `public/` directory.
+    Testes: Novos recursos são acompanhados por testes para garantir a confiabilidade.
 
-## 🧞 Commands
+    Especificidade: As interações com a IA são focadas em uma única tarefa por vez para garantir a precisão.
 
-All commands are run from the root of the project, from a terminal:
+Para entender a visão completa, a arquitetura e os próximos passos, consulte os seguintes documentos:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+    PLANNING.md: Contém a visão de alto nível do projeto, as decisões de arquitetura e os princípios de desenvolvimento.
 
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+    TASK.md: Detalha a lista de tarefas atuais, o backlog e os marcos para o desenvolvimento.
