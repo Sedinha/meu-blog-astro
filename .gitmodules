@@ -1,3 +1,4 @@
 [submodule "src/content/blog"]
 	path = src/content/blog
 	url = https://github.com/Sedinha/my-blog
+	branch = main

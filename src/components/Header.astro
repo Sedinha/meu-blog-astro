@@ -3,14 +3,23 @@ import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
+<!-- Fixed header/navbar structure moved from HeroTransition.astro -->
+<header class="fixed-header">
+	<div class="container">
+		<!-- Logo container and SVG moved from HeroTransition.astro -->
+		<div id="logo-container" class="logo-container">
+			<svg id="logo-svg" class="logo-svg" viewBox="0 0 50 50" width="40" height="40">
+				<g fill="currentColor" fill-rule="evenodd">
+					<path d="M15,15 L35,15 L37,20 L37,35 C37,38.866 33.866,42 30,42 L20,42 C16.134,42 13,38.866 13,35 L13,20 L15,15 Z" />
+					<path d="M37,24 L41,24 C43.209,24 45,25.791 45,28 C45,30.209 43.209,32 41,32 L37,32 L37,24 Z" />
+				</g>
+			</svg>
+		</div>
+		<nav class="nav-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
-		</div>
+		</nav>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
 				<span class="sr-only">Follow Astro on Mastodon</span>
@@ -39,44 +48,158 @@ import { SITE_TITLE } from '../consts';
 					></path></svg
 				>
 			</a>
+			<button id="theme-toggle" aria-label="Alternar tema">
+				<span class="sr-only">Alternar tema</span>
+				<svg viewBox="0 0 24 24" aria-hidden="true" width="32" height="32">
+					<!-- Sun icon -->
+					<path
+						class="sun"
+						fill="currentColor"
+						d="M12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.65 0-3 1.35-3 3s1.35 3 3 3 3-1.35 3-3-1.35-3-3-3zM11 3v2h2V3h-2zm0 16v2h2v-2h-2zM3 11v2h2v-2H3zm16 0v2h2v-2h-2zM5.6 5.6l1.4 1.4L8.4 5.6 7 4.2 5.6 5.6zm12.8 12.8l-1.4-1.4-1.4 1.4 1.4 1.4 1.4-1.4zM5.6 18.4l1.4-1.4-1.4-1.4-1.4 1.4 1.4 1.4zm12.8-12.8L17 4.2l-1.4 1.4 1.4 1.4 1.4-1.4z"
+					/>
+					<!-- Moon icon -->
+					<path
+						class="moon"
+						fill="currentColor"
+						d="M12 22c5.52 0 10-4.48 10-10 0-.44-.04-.87-.1-1.3-.34.31-.71.59-1.1.84a5.5 5.5 0 0 1-7.64-7.64c.25-.39.53-.76.84-1.1C13.87 2.04 13.44 2 13 2 7.48 2 3 6.48 3 12s4.48 10 9 10z"
+					/>
+				</svg>
+			</button>
+
+			<script>
+				// Função para alternar o tema
+				function toggleTheme() {
+					const currentTheme = document.documentElement.getAttribute('data-theme');
+					const newTheme = currentTheme === 'dusk' ? 'dawn' : 'dusk';
+					
+					// Atualiza o atributo HTML
+					document.documentElement.setAttribute('data-theme', newTheme);
+					
+					// Salva a preferência no localStorage
+					localStorage.setItem('theme', newTheme);
+				}
+
+				// Adiciona o event listener ao botão
+				document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+				
+				// Ajusta a visibilidade dos ícones com base no tema atual
+				function updateThemeIcon() {
+					const isDark = document.documentElement.getAttribute('data-theme') === 'dusk';
+					const sunIcon = document.querySelector('.sun');
+					const moonIcon = document.querySelector('.moon');
+					if (sunIcon && moonIcon) {
+						sunIcon.style.display = isDark ? 'block' : 'none';
+						moonIcon.style.display = isDark ? 'none' : 'block';
+					}
+				}
+				
+				// Chama a função no carregamento da página
+				updateThemeIcon();
+				
+				// Adiciona um observer para atualizar o ícone quando o tema mudar
+				const observer = new MutationObserver((mutations) => {
+					mutations.forEach((mutation) => {
+						if (mutation.attributeName === 'data-theme') {
+							updateThemeIcon();
+						}
+					});
+				});
+				
+				observer.observe(document.documentElement, {
+					attributes: true,
+					attributeFilter: ['data-theme']
+				});
+			</script>
 		</div>
-	</nav>
+	</div>
 </header>
 <style>
+	/* Core Header Styles */
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
+		position: fixed; /* Keep fixed position */
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 64px; /* Define header height */
+		background-color: var(--color-card-bg); /* Use theme variable */
+		box-shadow: 0 2px 10px rgba(var(--black), 0.1); /* Use theme variable */
+		z-index: 100; /* Ensure it's above other content */
+		transition: background-color 0.3s ease, box-shadow 0.3s ease;
+		margin: 0; /* Reset margin */
+		padding: 0 1em; /* Add padding */
 	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 24px;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
+
+	.logo-container {
+		position: relative;
+		width: 40px; /* Define logo container size */
+		height: 40px;
+	}
+
+	.logo-svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 40px; /* Define logo SVG size */
+		height: 40px;
+		color: var(--color-accent); /* Use theme variable */
+		opacity: 1; /* Default state: visible */
+		transition: opacity 0.2s ease;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 24px;
+	}
+
+	.nav-links a {
+		padding: 1em 0.5em; /* Add padding */
+		color: var(--color-text); /* Use theme variable */
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+		transition: color 0.3s ease, border-bottom-color 0.3s ease;
 	}
+
 	nav a.active {
 		text-decoration: none;
-		border-bottom-color: var(--accent);
+		border-bottom-color: var(--color-accent);
 	}
+
+	/* Styles for social links and theme toggle (already here) */
 	.social-links,
-	.social-links a {
+	.social-links a,
+	.social-links button {
 		display: flex;
 	}
+	
+	#theme-toggle {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 0.5em;
+		margin: 0;
+		color: var(--color-text);
+		border-radius: 50%;
+		transition: background-color 0.2s ease;
+	}
+	
+	#theme-toggle:hover {
+		background-color: rgba(var(--gray), 0.1);
+	}
+	
+	.sun, .moon {
+		transition: all 0.3s ease;
+	}
+	
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;

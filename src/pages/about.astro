@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
 import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
+const pageTitle = 'About uS';
 ---
 
 <Layout
-	title="About Me"
+	title={pageTitle}
 	description="Lorem ipsum dolor sit amet"
 	pubDate={new Date('August 08 2021')}
 	heroImage={AboutHeroImage}

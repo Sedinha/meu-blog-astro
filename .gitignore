@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# project planning and context
+context/
+PLANNING.md
+PLANNING_2.md
+TASK.md
+README_ASTRO.md
